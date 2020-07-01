@@ -13,16 +13,24 @@ from sqlalchemy.ext.declarative import declarative_base
 
 Base = declarative_base()
 
-class Task(Base):
-    """Tasks for the To Do list."""
+#เพิ่ม python เข้าไปบรรทัดนึงให้คอนเนคดาต้าเบส (resource) เข้ามาโดย
+data = pd.read_csv('User.csv')
+
+class LastLogin
+    """DateTime of each user's last_login"""
+    now = Column(DateTime)
+    havent_login_for_a_week = Column(Boolean, default=True)
+
+#class Task(Base):
+    #"""Tasks for the To Do list."""
     id = Column(Integer, primary_key=True)
     name = Column(Unicode, nullable=False)
     note = Column(Unicode)
-    creation_date = Column(DateTime, nullable=False)
-    due_date = Column(DateTime)
-    completed = Column(Boolean, default=False)
-    user_id = Column(Integer, ForeignKey('user.id'), nullable=False)
-    user = relationship("user", back_populates="tasks")
+    #creation_date = Column(DateTime, nullable=False)
+    #due_date = Column(DateTime)
+    #completed = Column(Boolean, default=False)
+    #user_id = Column(Integer, ForeignKey('user.id'), nullable=False)
+    #user = relationship("user", back_populates="tasks")
 
     def __init__(self, *args, **kwargs):
         """On construction, set date of creation."""
@@ -33,11 +41,12 @@ class User(Base):
     """The User object that owns tasks."""
     id = Column(Integer, primary_key=True)
     username = Column(Unicode, nullable=False)
-    email = Column(Unicode, nullable=False)
-    password = Column(Unicode, nullable=False)
-    date_joined = Column(DateTime, nullable=False)
-    token = Column(Unicode, nullable=False)
-    tasks = relationship("Task", back_populates="user")
+    #email = Column(Unicode, nullable=False)
+    #password = Column(Unicode, nullable=False)
+    #date_joined = Column(DateTime, nullable=False)
+    #token = Column(Unicode, nullable=False)
+    #tasks = relationship("Task", back_populates="user")
+    tag = Column(Integer)
 
     def __init__(self, *args, **kwargs):
         """On construction, set date of creation."""
