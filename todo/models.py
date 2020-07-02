@@ -1,6 +1,7 @@
 # in models.py
 from datetime import datetime
 import secrets
+import pandas
 
 # initializedb.py
 from sqlalchemy import engine_from_config
@@ -60,3 +61,28 @@ class User(Base):
     if bool(os.environ.get('DEBUG', '')):
         Base.metadata.drop_all(engine)
     Base.metadata.create_all(engine)
+
+#models.py
+
+class Login(Base):
+    userid = Column(Integer, primary_key=True)
+    name = Column(Unicode, nullable=False)
+    note = Column(Unicode)
+    now = Column(DateTime)
+    havent_login_for_a_week = Column(Boolean, default=True)
+
+In myapp/management/commands/populate.py:
+
+class Command(BaseCommand):
+
+def handle(self, *args, **options):
+
+    # Open ModelConnection
+    from django.conf import settings
+    database_name = settings.DATABASES['default']['NAME']
+    database_url = 'sqlite:///{}'.format(database_name)
+    engine = create_engine(database_url, echo=False)
+
+    # Insert data data
+    agencies = pd.DataFrame({"name": ["Agency 1", "Agency 2", "Agency 3"]})
+    agencies.to_sql("agency", con=engine, if_exists="replace")
