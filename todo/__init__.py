@@ -4,34 +4,31 @@ from tornado.ioloop import IOLoop
 from tornado.options import define, options
 from tornado.web import Application
 from todo.views import HelloWorld
-from todo.views import ProfileHandler
+from todo.views import IndexHandler
+from todo.views import StaticHandler
+import os
+
 import pandas as pd
-
-define('port', default=8888, help='port to listen on')
-
 my_cols = [str(i) for i in range(10000)] # create some row names
 
-#database = pd.read_csv('User_with_binary_tag.xls','rb',
-database = pd.read_csv('User_s.xls','rb',
-                        names=my_cols,
-                        header=None,
-                        engine="python")
-
-settings = {
-'debug': True,
-'autoreload': True,
-'static_path': 'Works/tornado_todo/User_s.xls'
-}
+define('port', default=8888, help='port to listen on')
+#myfile = open('User_s.xls', 'rb')
+myfile = pd.read_csv('User_s.xls', sep='|', names=my_cols , encoding='latin-1')
 
 def main():
     """Construct and serve the tornado application."""
+
+    settings = {
+            "debug": True,
+            "static_path": os.path.join(os.path.dirname(__file__), "tornado_todo")
+        }
     app = Application([
         ('/', HelloWorld),
-        #('/user_not_login_num', HelloWorld)
-        (r'/user/(.*)', ProfileHandler, dict(database=database))
-    ], **settings
-)
-
+        (r'/user/(.*)', IndexHandler),
+        #(r'/user/User_s.xls', StaticHandler, {'path': './User_s.xls'})
+        (r'/user/User_s.xls', StaticHandler, dict(path=settings['static_path']))
+        ], **settings)
+    
     http_server = HTTPServer(app)
     http_server.listen(options.port)
     print('Listening on http://localhost:%i' % options.port)

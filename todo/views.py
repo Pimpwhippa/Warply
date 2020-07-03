@@ -1,4 +1,7 @@
 from tornado.web import RequestHandler
+from tornado.web import StaticFileHandler
+import os
+import json
 
 
 class HelloWorld(RequestHandler):
@@ -7,18 +10,21 @@ class HelloWorld(RequestHandler):
     def get(self):
         """Handle a GET request for saying Hello World!."""
         self.write("Hello, world!")
-        #data = pd.read_csv('User.xls')
-        #self.write(data)
 
-class ProfileHandler(RequestHandler):
-    """Print database as the response body."""
+class IndexHandler(RequestHandler):
+    def get(self, arg):
+        self.render('User_s.xls')
 
-    def initialize(self, database):
-        self.database = database
-        self.write(dict(database=database))
+class StaticHandler(StaticFileHandler):
+    def initialize(self, myfile):
+        self.myfile = myfile
 
-    #def get(self, userid):
-        #self.userid = userid
+    def get(self, name):
+        self.write(myfile.read())
 
+#class FileItem:
+    #def __init__(self, fname):
+        #self.fname = fname
+        #json.dumps(myfile)
 
 
