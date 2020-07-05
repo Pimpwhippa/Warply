@@ -5,7 +5,9 @@ from tornado.options import define, options
 from tornado.web import Application
 from tornado.web import StaticFileHandler
 from todo.views import HelloWorld
-from todo.views import FileHandler
+from todo.views import MainHandler
+from todo.views import DataLoader
+
 import os
 
 define('port', default=8888, help='port to listen on')
@@ -15,7 +17,8 @@ def main():
 
     app = Application([
         ('/', HelloWorld),
-        ('/user', FileHandler),
+        ('/user', MainHandler),
+        ('/data', DataLoader),({'path': '/home/pimpwhippa/Works/tornado_todo/todo'}),
         ('/arai/(.*)', StaticFileHandler, {'path': '/home/pimpwhippa/Works/tornado_todo/todo'}) 
         #have to type the filename you want displayed in the url box yourself after routing /arai/
         ])

@@ -11,13 +11,33 @@ class HelloWorld(RequestHandler):
         """Handle a GET request for saying Hello World!."""
         self.write("Hello, world!")
 
-userdata = pd.read_csv('User_s.xls', sep='\', header =0)
-
-class FileHandler(RequestHandler):
-
+class MainHandler(RequestHandler):
     def get(self):
-        userdata.to_json(self)
-        self.write("ajaja")
+        items = ["Item 1", "Item 2", "Item 3"]
+        self.render("template.html", title="My title", items=items)
+
+class DataLoader(RequestHandler):
+
+    def lots_of_data_func():
+        df = pd.read_csv('User_s.xls', header = 0, sep=" ")
+        return df
+
+    async def get(self):
+       data = await lots_of_data_func()
+       self.write({"data":data})
+
+def routes():
+    return Application([
+        (r"/", MainHandler),
+    ])
+
+#userdata = pd.read_csv('User_s.xls', sep='\', header =0)
+
+#class FileHandler(RequestHandler):
+
+    #def get(self):
+        #userdata.to_json(self)
+        #self.write("ajaja")
 
 #class StaticHandler(StaticFileHandler):
     #def initialize(self, myfile):
