@@ -1,11 +1,11 @@
 # Warply
 task python developer
 
-#activate virtual environment
+activate virtual environment:
 pipenv shell
 
-#install package 
+install package: 
 pipenv install -e .
 
-#launch app in cli
+launch app in cli:
 serve_app
