@@ -2,7 +2,7 @@ from tornado.web import RequestHandler
 from tornado.web import StaticFileHandler
 import os
 import json
-
+import pandas as pd
 
 class HelloWorld(RequestHandler):
     """Print 'Hello, world!' as the response body."""
@@ -11,20 +11,24 @@ class HelloWorld(RequestHandler):
         """Handle a GET request for saying Hello World!."""
         self.write("Hello, world!")
 
-class IndexHandler(RequestHandler):
-    def get(self, arg):
-        self.render('User_s.xls')
+userdata = pd.read_csv('User_s.xls', sep='\', header =0)
 
-class StaticHandler(StaticFileHandler):
-    def initialize(self, myfile):
-        self.myfile = myfile
+class FileHandler(RequestHandler):
 
-    def get(self, name):
-        self.write(myfile.read())
+    def get(self):
+        userdata.to_json(self)
+        self.write("ajaja")
 
-#class FileItem:
-    #def __init__(self, fname):
-        #self.fname = fname
-        #json.dumps(myfile)
+#class StaticHandler(StaticFileHandler):
+    #def initialize(self, myfile):
+        #self.myfile = myfile
+        #print("ruleaw")
+
+#how to know if initialize() get called or not?
+
+    #def get(self, name):
+        #self.write(myfile.read())
+
+
 
 
