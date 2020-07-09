@@ -3,6 +3,7 @@ from tornado.web import StaticFileHandler
 import os
 import json
 import pandas as pd
+import csv
 
 class HelloWorld(RequestHandler):
     """Print 'Hello, world!' as the response body."""
@@ -12,43 +13,14 @@ class HelloWorld(RequestHandler):
         self.write("Hello, world!")
 
 class MainHandler(RequestHandler):
-    def get(self):
-        items = ["Item 1", "Item 2", "Item 3"]
-        self.render("template.html", title="My title", items=items)
-
-class DataLoader(RequestHandler):
-
-    def lots_of_data_func():
-        df = pd.read_csv('User_s.xls', header = 0, sep=" ")
-        return df
-
-    async def get(self):
-       data = await lots_of_data_func()
-       self.write({"data":data})
-
-def routes():
-    return Application([
-        (r"/", MainHandler),
-    ])
-
-#userdata = pd.read_csv('User_s.xls', sep='\', header =0)
-
-#class FileHandler(RequestHandler):
-
-    #def get(self):
-        #userdata.to_json(self)
-        #self.write("ajaja")
-
-#class StaticHandler(StaticFileHandler):
-    #def initialize(self, myfile):
-        #self.myfile = myfile
-        #print("ruleaw")
-
-#how to know if initialize() get called or not?
-
-    #def get(self, name):
-        #self.write(myfile.read())
-
-
-
-
+    def get(self, MainHandler):
+        #items = ["Baba", "Item 2", "Item 3"]
+        #with open('arai.csv') as f:
+        var1 = "key"
+        var2 = "value"
+        csv_dic={var1:[], var2:[]}
+        csvFile = csv.reader(open('/home/pimpwhippa/Works/tornado_todo/todo/arai.csv'))
+        for row in csvFile:
+            csv_dic[var1].append(row[0])
+            csv_dic[var2].append(row[1])
+        self.write(csv_dic)
