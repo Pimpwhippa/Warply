@@ -6,7 +6,7 @@ from tornado.web import Application
 from tornado.web import StaticFileHandler
 from todo.views import HelloWorld
 from todo.views import MainHandler
-#from todo.views import DataLoader
+#from todo.views import LastLogin
 
 import os
 
@@ -18,6 +18,7 @@ def main():
     app = Application([
         ('/', HelloWorld),
         ('/item/(.*)', MainHandler),
+        #('/lastlogin/(.*)', LastLogin, dict(database=last_login)),
         ('/data/(.*)', StaticFileHandler, {'path': '/home/pimpwhippa/Works/tornado_todo/todo'})
         #('/data', DataLoader)
         ])
