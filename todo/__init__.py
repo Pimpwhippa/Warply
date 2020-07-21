@@ -6,7 +6,8 @@ from tornado.web import Application
 from tornado.web import StaticFileHandler
 from todo.views import HelloWorld
 from todo.views import MainHandler
-#from todo.views import LastLogin
+from todo.views import Render
+#from todo.views import OutputHandler
 
 import os
 
@@ -18,11 +19,14 @@ def main():
     app = Application([
         ('/', HelloWorld),
         ('/item/(.*)', MainHandler),
-        #('/lastlogin/(.*)', LastLogin, dict(database=last_login)),
-        ('/data/(.*)', StaticFileHandler, {'path': '/home/pimpwhippa/Works/tornado_todo/todo'})
+        ('/render/(.*)', Render),
+        #('/output/(.*)', OutputHandler)
+        #('/lastlogin/(.*)', LastLogin, {"last_login": self.MainHandler}),
+        ('/data/(.*)', StaticFileHandler, {'path': '/home/pimpwhippa/Works/tornado_todo/todo'}),
         #('/data', DataLoader)
+        #static_path=os.path.join(SRC, "static")
         ])
-    
+        
     http_server = HTTPServer(app)
     http_server.listen(options.port)
     print('Listening on http://localhost:%i' % options.port)

@@ -8,7 +8,7 @@ print("bm2       = %s" % bm2)
 print("bm1 & bm2 = %s" % (bm1&bm2))
 print("bm1 | bm2 = %s" % (bm1|bm2))
 
-how to encode from columns of tag1, tag2, tag3, ..., tag 10
+how to encode from columns of tag1, tag2, tag3, ..., tag 10 (how many bit?)
 down to 1, 0, 0, ..., 0 (2^10 bit)
 to binary? 1000100000   (10 bit)
 and then BitMap?
