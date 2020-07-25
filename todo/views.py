@@ -21,12 +21,12 @@ class MainHandler(RequestHandler):
     @gen.coroutine
     def get(self, MainHandler):
 
-        csvFile = pd.read_csv('/home/pimpwhippa/Works/tornado_todo/todo/User_s_no_binary.csv', parse_dates = ['last_login'])
+        csvFile = pd.read_csv('/home/pimpwhippa/Works/tornado_todo/todo/later_user.csv', parse_dates = ['last_login'])
         now = datetime.now()
         csvFile['now'] = now
         csvFile['since'] = csvFile['now'] - csvFile['last_login']
         csvFile['havent_login_for_a_week'] = csvFile['since'] > timedelta(days=7)
-        nono = len(csvFile['havent_login_for_a_week'] == True)
+        nono = sum(csvFile['havent_login_for_a_week'] == True)
         num_hvnt_login_for_a_week = str(nono).encode("utf-8").decode("utf-8")
         #self.write(bytes([nono])) ValueError: bytes must be in range(0, 256)
         
