@@ -5,6 +5,7 @@ from tornado import gen
 from datetime import datetime
 import pandas as pd
 import json
+from datetime import timedelta
 
 
 class HelloWorld(RequestHandler):
@@ -23,10 +24,10 @@ class MainHandler(RequestHandler):
         csvFile = pd.read_csv('/home/pimpwhippa/Works/tornado_todo/todo/User_s_no_binary.csv', parse_dates = ['last_login'])
         now = datetime.now()
         csvFile['now'] = now
-        csvFile['since'] = csvFile['now'] - csvFile['last_login']    
-        #csvFile = csvFile.to_dict()
-        many = len(csvFile['since'])
-        self.write(chr(many))
-        #self.write(new_dict[v])
-        #self.write(new_dict[v])
-        #KeyError: '2020-05-02 21:11:11'
+        csvFile['since'] = csvFile['now'] - csvFile['last_login']
+        csvFile['havent_login_for_a_week'] = csvFile['since'] > timedelta(days=7)
+        nono = len(csvFile['havent_login_for_a_week'] == True)
+        num_hvnt_login_for_a_week = str(nono).encode("utf-8").decode("utf-8")
+        #self.write(bytes([nono])) ValueError: bytes must be in range(0, 256)
+        
+        self.write(num_hvnt_login_for_a_week)
