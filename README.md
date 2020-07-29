@@ -1,4 +1,4 @@
-# Warply
+
 task python developer
 
 Your task is to create a microservice with a tornado API endpoint that you will design using the bitmap roaring implementation in python that you can find here (https://github.com/Ezibenroc/PyRoaringBitMap).
