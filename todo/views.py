@@ -6,6 +6,8 @@ from datetime import datetime
 import pandas as pd
 import json
 from datetime import timedelta
+from pyroaring import BitMap
+import random
 
 
 class HelloWorld(RequestHandler):
@@ -31,3 +33,28 @@ class MainHandler(RequestHandler):
         #self.write(bytes([nono])) ValueError: bytes must be in range(0, 256)
         
         self.write(num_hvnt_login_for_a_week)
+
+class UserTag(RequestHandler):
+    def get(self, UserTag):
+
+        customer = pd.read_csv('/home/pimpwhippa/Works/tornado_todo/todo/binary_tag.csv')
+        tag = customer['tag'].to_dict()   
+#gen 500 randint
+        ks = []
+        for _ in range(500):
+            n = random.randint(0,10)
+            ks.append(n)
+#print(ks)
+
+#gen 500 rows of BitMap set
+#by taking those 500 randint as k for random.sample(range(1, 11), 3) <--k =3
+        rows = []
+        for k in ks:
+            row = BitMap(random.sample(range(1,11), k))
+            rows.append(row)
+
+        i = iter(rows)
+        b = dict(zip(i, i))        
+        self.write(b)
+
+
