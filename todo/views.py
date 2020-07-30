@@ -44,7 +44,6 @@ class UserTag(RequestHandler):
         for _ in range(500):
             n = random.randint(0,10)
             ks.append(n)
-#print(ks)
 
 #gen 500 rows of BitMap set
 #by taking those 500 randint as k for random.sample(range(1, 11), 3) <--k =3
@@ -53,8 +52,17 @@ class UserTag(RequestHandler):
             row = BitMap(random.sample(range(1,11), k))
             rows.append(row)
 
-        i = iter(rows)
-        b = dict(zip(i, i))        
-        self.write(b)
+#make a DataFrame of 500 row from dict of BitMap sets
+        df = pd.DataFrame(data=rows, columns= ['tag1','tag2', 'tag3', 'tag4','tag5', 'tag6', 'tag7', 'tag8', 'tag9', 'tag10'])
+
+#find no. of rows that have [1,2] in it
+        Q1 = df.loc[(df['tag1'] == 1.0) & (df['tag2'] == 2.0)]
+        num_user_with_tag1_and_tag2 = str(len(Q1)).encode("utf-8").decode("utf-8")
+        self.write(num_user_with_tag1_and_tag2)
+
+#find row index of all rows that have [1]
+        df['id'] = range(1,501)
+        IDtag1 = df.loc[df['tag1'] == 1.0]['id']
+        self.write(IDtag1.to_dict())
 
 
