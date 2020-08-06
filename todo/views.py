@@ -30,7 +30,6 @@ class MainHandler(RequestHandler):
         csvFile['havent_login_for_a_week'] = csvFile['since'] > timedelta(days=7)
         nono = sum(csvFile['havent_login_for_a_week'] == True)
         num_hvnt_login_for_a_week = str(nono).encode("utf-8").decode("utf-8")
-        #self.write(bytes([nono])) ValueError: bytes must be in range(0, 256)
         
         self.write(num_hvnt_login_for_a_week)
 

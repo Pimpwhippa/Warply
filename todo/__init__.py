@@ -7,8 +7,6 @@ from tornado.web import StaticFileHandler
 from todo.views import HelloWorld
 from todo.views import MainHandler
 from todo.views import UserTag
-#from todo.views import OutputHandler
-
 import os
 
 define('port', default=8888, help='port to listen on')
@@ -20,11 +18,7 @@ def main():
         ('/', HelloWorld),
         ('/item/(.*)', MainHandler),
         ('/user/(.*)', UserTag),
-        #('/output/(.*)', OutputHandler)
-        #('/lastlogin/(.*)', LastLogin, {"last_login": self.MainHandler}),
         ('/data/(.*)', StaticFileHandler, {'path': '/home/pimpwhippa/Works/tornado_todo/todo'}),
-        #('/data', DataLoader)
-        #static_path=os.path.join(SRC, "static")
         ])
         
     http_server = HTTPServer(app)

@@ -13,3 +13,4 @@ print("bm1 | bm2 = %s" % (bm1|bm2))
 #to binary? 1000100000   (10 bit)
 #and then BitMap?
 #then can look at BitMap columns of binary?
+#1nullnullnull5nullnull... yes this is BitMap

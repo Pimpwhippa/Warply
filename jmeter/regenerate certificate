@@ -1,0 +1,16 @@
+test log
+
+test script recorder
+
+folder where jmeter was initiated
+
+start jmeter with sudo jmeter
+2020/08/03 12:34:15 INFO  - jmeter.protocol.http.proxy.ProxyControl: Creating Proxy CA in /usr/share/jmeter/bin/proxyserver.jks 
+finally found my certificate there!
+
+then at the launching directory 
+the test plan is saved there
+
+
+something dynamic
+it keeps generating for different URLs
