@@ -5,7 +5,7 @@ from tornado.options import define, options
 from tornado.web import Application
 from tornado.web import StaticFileHandler
 from todo.views import HelloWorld
-from todo.views import MainHandler
+from todo.views import HvntLoginForAWeek
 from todo.views import UserTag
 import os
 
@@ -16,7 +16,7 @@ def main():
 
     app = Application([
         ('/', HelloWorld),
-        ('/item/(.*)', MainHandler),
+        ('/last_login/(.*)', HvntLoginForAWeek),
         ('/user/(.*)', UserTag),
         ('/data/(.*)', StaticFileHandler, {'path': '/home/pimpwhippa/Works/tornado_todo/todo'}),
         ])

@@ -1,12 +1,11 @@
 from tornado.web import RequestHandler
 from tornado.web import StaticFileHandler
-import functools
 from tornado import gen
 from datetime import datetime
-import pandas as pd
-import json
 from datetime import timedelta
 from pyroaring import BitMap
+import pandas as pd
+import json
 import random
 
 
@@ -17,11 +16,10 @@ class HelloWorld(RequestHandler):
         """Handle a GET request for saying Hello World!."""
         self.write("Hello, world!")
 
-class MainHandler(RequestHandler):
+class HvntLoginForAWeek(RequestHandler):
 
-    #@functools.lru_cache(maxsize=500)
     @gen.coroutine
-    def get(self, MainHandler):
+    def get(self, HvntLoginForAWeek):
 
         csvFile = pd.read_csv('/home/pimpwhippa/Works/tornado_todo/todo/later_user.csv', parse_dates = ['last_login'])
         now = datetime.now()

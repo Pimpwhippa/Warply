@@ -1,0 +1,5 @@
+Label,# Samples,Average,Min,Max,Std. Dev.,Error %,Throughput,KB/sec,Avg. Bytes
+Thread Group:user,1000,27619,460,70818,22523.90,0.00%,13.7,41.46,3101.2
+Thread Group:later_user.csv,1000,4796,2125,13237,2661.92,0.00%,13.3,40.18,3093.6
+Thread Group:hvnt_login_for_a_week,1000,4367,240,8511,2432.02,0.00%,14.2,2.73,197.0
+TOTAL,3000,12261,240,70818,17070.67,0.00%,39.2,81.48,2130.6
